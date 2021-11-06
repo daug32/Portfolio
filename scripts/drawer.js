@@ -1,15 +1,12 @@
-let canvas, body, canvasSize;
+let canvas, body, parent, hyperCube;
 let mousePos, rotate;
-let hyperCube;
 
 function setup(){
 	//Initialisation of settings and canvas
-	body = document.getElementById("body");
-	let W = body.clientWidth * 0.7;
-	canvasSize = W < 550 ? W : 550;
-	canvas = createCanvas(canvasSize, canvasSize);
+	body = document.getElementsByTagName("body")[0];
+	parent = document.getElementById("canvasContainer");
+	canvas = createCanvas(parent.clientWidth, parent.clientHeight);
 	canvas.parent("canvasContainer");
-	canvas.style("right", ((body.clientWidth - canvasSize) * 0.5).toString());
 
 	//These variables are used for rotating the teseract
 	mousePos = new Vector();
@@ -18,7 +15,7 @@ function setup(){
 	//Initilisation of hyperCube
 	let size = 100;
 	hyperCube = new Tesseract(
-		new Vector(canvasSize / 2, canvasSize / 2, 150, 0), 
+		new Vector(width / 2, height / 2, 150, 0), 
 		new Vector(size, size, size, size)
 	);
 	//set default params for teseract
@@ -26,19 +23,11 @@ function setup(){
 	hyperCube.XZ = PI / 6;
 	hyperCube.YZ = PI / 3;
 
-	stroke(255);
+	stroke(255, 255, 255, 120);
 	frameRate(58);
 }
-function draw(){
-	let W = body.clientWidth * 0.7;
-	canvasSize = W < 550 ? W : 550	
-	if(width != canvasSize) {
-		resizeCanvas(canvasSize, canvasSize);
-		hyperCube.center.x = width / 2;
-		hyperCube.center.y = height / 2;
-		canvas.style("right", (body.clientWidth - 550) * 0.5);
-	}
 
+function draw(){
 	//make the rotation dependence on the mouse position
 	if(mouseIsPressed)
 	{
@@ -52,7 +41,7 @@ function draw(){
 
 	background(25, 25, 25);
 
-	let step = PI / 360; //0.5f degree
+	let step = PI / 360;
 	//hyperCube.WZ += step;
 	hyperCube.XZ += step;
 	hyperCube.YZ += step;

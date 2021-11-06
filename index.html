@@ -3,55 +3,64 @@
 <head>
 	<title>Dmitry Ivanov</title>
 	<link rel="stylesheet" href="style.css" />	
-	<!-- using libruaries: -->
-	<script src="scripts/core/p5.min.js"></script>
-	<script src="scripts/core/jquery-3.6.0.min.js"></script>
-	<!-- custom scripts for drawing tesseract -->
-	<script src="scripts/vector.js"></script>
-	<script src="scripts/tesseract.js"></script>
-	<script src="scripts/drawer.js"></script>
+	<meta http-equiv="Cache-control" content="mast-revalidate">
+
+	<script defer src="scripts/core/p5.min.js"></script>
+	<script defer src="scripts/vector.js"></script>
+	<script defer src="scripts/tesseract.js"></script>
+	<script defer src="scripts/drawer.js"></script>
+	<script defer src="scripts/contactElementsAnimation.js"></script>
 </head>
-<body id="body">
-	<div class="wrapper">
-		<div><h1>Hello, world!\n</h1></div>
+<body>
+	<header>
+		<img src="images/avatar.png" class="avatar"></img>
+	</header>
+	<main>
+		<h1>Hello, world!\n</h1>
+
 		<div class="line"></div>
+
 		<div id="canvasContainer"></div>
 		<p>That's a hypercube. You can rotate it in WX and WY planes using mouse</p>
-		<div class="contactInformation"	>
-			<section>
-				<h2>Hi, my name's Dmitry Ivanov</h2>
-				<p>
-					Who am i? I am a bechalor's student at VSUT (Volga State University of Technology) in a software engeneering course. 
-					I live in Youshkar-Ola (Russia, Mariy El) and wish to be a superb developer. 
-					I hope you'll find here something interesting for you.
-				</p>
-			</section>
+
+		<div class="contactInformation" data-status="true">
+			<h2>Hi, my name's Dmitry Ivanov</h2>
+			<p>
+				Who am i? I am a bechalor's student at VSUT (Volga State University of Technology) in a software engeneering course. 
+				I live in Youshkar-Ola (Russia, Mariy El) and wish to be a superb developer. 
+				I hope you'll find here something interesting for you.
+			</p>
 		</div>
-		<div class="contactInformation">
-			<section>
-				<h2>My skills</h2>
-				<p>
-					I am learning full-stack development with specialisation at back-end tasks. 
-					I am pretty common with C++ and can write Windows application by using WinAPI, Qt or .Net Framework.
- 				</p>
-			</section>
+
+		<div class="contactInformation" data-status="true">
+			<h2>My skills</h2>
+			<p>
+				I am learning full-stack development with specialisation at back-end tasks. 
+				I am pretty common with C++ and can write Windows application by using WinAPI, Qt or .Net Framework.
+			</p>
 		</div>
-		<div class="contactInformation">
-			<section>
-				<h2>Projects</h2>
-				<p><sub>1</sub><a href="https://github.com/daug32/ConsoleRenderer">ConsoleRenderer.</a></p>
-				<p><sub>2</sub><a href="">That's empty right now.</a></p>
-			</section>
+
+		<div class="contactInformation" data-status="true">
+			<h2>Projects</h2>
+			<p><sub>1</sub><a href="https://github.com/daug32/ConsoleRenderer">ConsoleRenderer.</a></p>
+			<p><sub>2</sub><a href="">That's empty right now.</a></p>
 		</div>
-			<div class="line"></div>
-		<div><img src="images/avatar.png" class="avatar"></img></div>
+
+		<div class="line"></div>
+	</main>
+	<footer>
 		<p>Contact me!</p>
-		<div class="contactReferences">
-			<script src="scripts/contactElementsAnimation.js"></script>
-			<a href="https://vk.com/something_is_here"><img class="contactElement" src="images/VK-holey.png"></img></a>
-			<a href="https://github.com/daug32"><img class="contactElement" src="images/GitHub.png"></img></a>
-			<a href=""><img class="contactElement" src="images/Discord.png"></img>
+		<ul>
+			<li href="https://vk.com/something_is_here">
+				<img class="contactElement" src="images/VK-holey.png"></img>
+			</li>
+			<li href="https://github.com/daug32">
+				<img class="contactElement" src="images/GitHub.png"></img>
+			</li>
+			<li href="">
+				<img class="contactElement" src="images/Discord.png"></img>
+			</li>
 		</div>
-	</div>
+	</footer>
 </body>
 </html>

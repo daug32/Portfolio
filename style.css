@@ -2,54 +2,66 @@
 	font-family: "MuseoSansCyr";
 	src: url("fonts/MuseoSansCyrl-300.ttf");
 }
+:root {
+	--White: rgb(205, 199, 199);
+	--White2: rgb(179, 179, 179);
+	--White3: rgb(159, 159, 159);
+}
 body {
 	background-color: rgb(20, 20, 20);
+	z-index: 20;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 h1 {
-	color: rgb(179, 179, 179);
+	color: var(--White);
 	text-align: center;
 	font-size: 60px;
 	font-family: "MuseoSansCyr"; 
 	margin-bottom: 0;
 }
 h2 {
-	color: rgb(139, 139, 139);
+	color: var(--White2);
 	text-align: center;
 	font-size: 32px;
 	font-family: "MuseoSansCyr"; 
 }
 p {
-	color: rgb(109, 109, 109);
+	color: var(--White3);
 	text-align: center;
 	font-size: 22px;
 	font-family: "MuseoSansCyr"; 
 }
 a {
-	color: rgb(179, 179, 179);
+	color: var(--White2);
 	border-bottom: 0px;
 }
 
-.wrapper {
-	grid-template-columns: auto;
-	grid-template-columns: auto;
-	width: 70%;
-	position: absolute;
-	left: 15%;
+main, footer {
+	width: 70vw;
 	background-color: rgb(25, 25, 25);
 	justify-content: center;
 }
 #canvasContainer {
-	max-width: 550px;
-	margin-left: auto;
-	margin-right: auto;
+	z-index: 0;
+	width: 70vw;
+	height: 50vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 .contactInformation {
 	max-width: 650px;
 	width: 90%;
-	visibility: hidden;
-	margin-right: auto;
-	margin-left: auto;
-	margin-bottom: 150px;
+	margin: 0 auto 150px auto;
+	position: relative;
+	left: -100%;
+	transition: all 1.25s;
+}
+.contactInformation[data-status = "true"] {
+	position: relative;
+	left: 0;
 }
 .avatar {
 	width: 100px;
@@ -61,40 +73,28 @@ a {
 	max-width: 650px;
 	width: 90%;
 	height: 2px;
-	background-color: rgb(179, 179, 179);
+	background-color: var(--White);
 	margin-right: auto;
 	margin-left: auto;
 }	
-.contactReferences {
+ul {
+	list-style:none;
 	display: flex;
-	flex-direction: row;
 	justify-content: center;
-	margin-bottom: 25px;
+	padding: 0;
+	margin: 0;
+}
+li { 
+	transition: all 0.25s;
+	margin: 10px; 
+}
+li:hover {
+	width: 40px;
+	height: 40px;
+	margin: 8px;
+	opacity: 40%;
 }
 .contactElement {
-	width: 24px;
-	height: 24px;
-	margin: 10px;
-	opacity: 80%;
-	image-rendering: crisp-edges;
-	animation-duration: 1.2s;
-}
-.contactElement:hover {
-	transition: all 0.25s;
-	width: 26px;
-	height: 26px;
-	opacity: 40%;
-	margin: 8px;
-}
-
-
-@keyframes bottomTopAppearence{
-	from {
-		position: relative;
-		top: 500px;
-	}
-	to {
-		position: relative;
-		top: 0px;
-	}
+	width: 36px;
+	height: 36px;
 }
