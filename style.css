@@ -1,0 +1,100 @@
+@font-face {
+	font-family: "MuseoSansCyr";
+	src: url("fonts/MuseoSansCyrl-300.ttf");
+}
+body {
+	background-color: rgb(20, 20, 20);
+}
+h1 {
+	color: rgb(179, 179, 179);
+	text-align: center;
+	font-size: 60px;
+	font-family: "MuseoSansCyr"; 
+	margin-bottom: 0;
+}
+h2 {
+	color: rgb(139, 139, 139);
+	text-align: center;
+	font-size: 32px;
+	font-family: "MuseoSansCyr"; 
+}
+p {
+	color: rgb(109, 109, 109);
+	text-align: center;
+	font-size: 22px;
+	font-family: "MuseoSansCyr"; 
+}
+a {
+	color: rgb(179, 179, 179);
+	border-bottom: 0px;
+}
+
+.wrapper {
+	grid-template-columns: auto;
+	grid-template-columns: auto;
+	width: 70%;
+	position: absolute;
+	left: 15%;
+	background-color: rgb(25, 25, 25);
+	justify-content: center;
+}
+#canvasContainer {
+	max-width: 550px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.contactInformation {
+	max-width: 650px;
+	width: 90%;
+	visibility: hidden;
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: 150px;
+}
+.avatar {
+	width: 100px;
+	position: fixed;
+	bottom: 15px;
+	right: 0%;
+}
+.line {
+	max-width: 650px;
+	width: 90%;
+	height: 2px;
+	background-color: rgb(179, 179, 179);
+	margin-right: auto;
+	margin-left: auto;
+}	
+.contactReferences {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin-bottom: 25px;
+}
+.contactElement {
+	width: 24px;
+	height: 24px;
+	margin: 10px;
+	opacity: 80%;
+	image-rendering: crisp-edges;
+	animation-duration: 1.2s;
+}
+.contactElement:hover {
+	transition: all 0.25s;
+	width: 26px;
+	height: 26px;
+	opacity: 40%;
+	margin: 8px;
+}
+
+
+@keyframes bottomTopAppearence{
+	from {
+		position: relative;
+		top: 500px;
+	}
+	to {
+		position: relative;
+		top: 0px;
+	}
+}
