@@ -7,6 +7,6 @@ function scrollCheck() {
     {
         let y = contactContainers[i].getBoundingClientRect().top;
         if(y < window.innerHeight) contactContainers[i].dataset.status = "true";
-        else contactContainers[i].dataset.status = "false";
+        else if(y > window.innerHeight * 1.1) contactContainers[i].dataset.status = "false";
     }
 }
