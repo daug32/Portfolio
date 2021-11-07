@@ -32,10 +32,15 @@ p {
 	text-align: center;
 	font-size: 22px;
 	font-family: "MuseoSansCyr"; 
+	position: relative;
 }
 a {
 	color: var(--White2);
 	border-bottom: 0px;
+	transition:all 0.3s;
+}
+a:hover {
+	opacity: 0.6;
 }
 
 main, footer {
@@ -56,12 +61,19 @@ main, footer {
 	width: 90%;
 	margin: 0 auto 150px auto;
 	position: relative;
-	left: -100%;
-	transition: all 1.25s;
+	left: -100vw;
+	animation-fill-mode: forwards;
+	animation-duration: 2s;
+	animation-name: none;
+	animation-timing-function: linear;
+	transition: all 3s;
+	transition-delay: 3s;
 }
 .contactInformation[data-status = "true"] {
-	position: relative;
-	left: 0;
+	animation-name: left-right-appearence; 
+}
+@keyframes left-right-appearence {
+	to { left: 0; }	
 }
 .avatar {
 	width: 100px;

@@ -4,12 +4,6 @@
 	<title>Dmitry Ivanov</title>
 	<link rel="stylesheet" href="style.css" />	
 	<meta http-equiv="Cache-control" content="mast-revalidate">
-
-	<script defer src="scripts/core/p5.min.js"></script>
-	<script defer src="scripts/vector.js"></script>
-	<script defer src="scripts/tesseract.js"></script>
-	<script defer src="scripts/drawer.js"></script>
-	<script defer src="scripts/contactElementsAnimation.js"></script>
 </head>
 <body>
 	<header>
@@ -23,16 +17,16 @@
 		<div id="canvasContainer"></div>
 		<p>That's a hypercube. You can rotate it in WX and WY planes using mouse</p>
 
-		<div class="contactInformation" data-status="true">
-			<h2>Hi, my name's Dmitry Ivanov</h2>
+		<div class="contactInformation" data-status="false">
+			<h2>Hi, i am Dmitry Ivanov</h2>
 			<p>
-				Who am i? I am a bechalor's student at VSUT (Volga State University of Technology) in a software engeneering course. 
+				Who am i? I am a bechalor's student at VSUT (Volga State University of Technology) in a software engeneering deoartament. 
 				I live in Youshkar-Ola (Russia, Mariy El) and wish to be a superb developer. 
 				I hope you'll find here something interesting for you.
 			</p>
 		</div>
 
-		<div class="contactInformation" data-status="true">
+		<div class="contactInformation" data-status="false">
 			<h2>My skills</h2>
 			<p>
 				I am learning full-stack development with specialisation at back-end tasks. 
@@ -40,7 +34,7 @@
 			</p>
 		</div>
 
-		<div class="contactInformation" data-status="true">
+		<div class="contactInformation" id="projList" data-status="false">
 			<h2>Projects</h2>
 			<p><sub>1</sub><a href="https://github.com/daug32/ConsoleRenderer">ConsoleRenderer.</a></p>
 			<p><sub>2</sub><a href="">That's empty right now.</a></p>
@@ -62,5 +56,12 @@
 			</li>
 		</div>
 	</footer>
+	
+
+	<script defer src="scripts/core/p5.min.js"></script>
+	<script defer src="scripts/vector.js"></script>
+	<script defer src="scripts/tesseract.js"></script>
+	<script defer src="scripts/drawer.js"></script>
+	<script async src="scripts/contactElementsAnimation.js"></script>
 </body>
 </html>

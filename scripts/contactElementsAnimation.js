@@ -1,17 +1,12 @@
+var contactContainers = document.getElementsByClassName("contactInformation");
 
-var contactContainers = document.
-    getElementsByClassName("contactInformation");
-document.getElementsByTagName("body")[0].
-    addEventListener("scroll", function() 
+
+setInterval(scrollCheck, 400);
+function scrollCheck() {
+    for(var i = 0; i < contactContainers.length; i++)
     {
-        for(var i = 0; i < contactContainers.length; i++)
-        {
-            var status = "false";
-            var y = contactContainers[i].
-                getBoundingClientRect().top;
-            if(y < window.innerHTML && y > -1) 
-                status = "true";
-            contactContainers[i].dataset.status = status;
-        }
+        let y = contactContainers[i].getBoundingClientRect().top;
+        if(y < window.innerHeight) contactContainers[i].dataset.status = "true";
+        else contactContainers[i].dataset.status = "false";
     }
-);
+}

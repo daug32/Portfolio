@@ -30,8 +30,10 @@ class Vector{
     this.w -= a.w;
   }
   Length(){
-    return this.x * this.x + this.y * this.y +
-           this.z * this.z + this.w * this.w;
+    return this.x * this.x + 
+           this.y * this.y +
+           this.z * this.z +
+           this.w * this.w;
   }
 }
 
