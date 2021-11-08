@@ -6,7 +6,7 @@ for(var i = 0; i < ulElements.length; i++){
 
 function ulAdditionalAnimationOn(event) {    
     let el = event.target;
-    if(el.tagName === "UL") return;
+    if(el.tagName === "UL" || el.tagName === "TABLE") return;
     while(el.tagName !== "LI") el = el.parentElement;
 
     let elements  = el.parentElement.children;
@@ -17,7 +17,7 @@ function ulAdditionalAnimationOn(event) {
 }
 function ulAdditionalAnimationOut(event) {   
     let el = event.target;
-    if(el.tagName === "UL") return;
+    if(el.tagName === "UL" || el.tagName === "TABLE") return;
     while(el.tagName !== "LI") el = el.parentElement;
 
     let elements = el.parentElement.children;

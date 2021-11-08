@@ -15,8 +15,18 @@
 		<div class="line"></div>
 
 		<div id="canvasContainer"></div>
-		<p>That's a hypercube. You can rotate it in WX (horizontal) and WZ (vertical) planes using mouse</p>
-		<div class="window"></div>
+		<div class="contactInformation" data-status="false">
+			<p>That's a hypercube. You can rotate it in WX (horizontal) and WZ (vertical) planes using mouse</p>
+			<ul>
+				<li><input type="range" min="0" max="360" step="1" id="input_YZ"></input><span id="span_YZ">YZ(X-axis): </span></li>
+				<li><input type="range" min="0" max="360" step="1" id="input_XZ"></input><span id="span_XZ">XZ(Y-axis): </span></li>
+				<li><input type="range" min="0" max="360" step="1" id="input_XY"></input><span id="span_XY">XY(Z-axis): </span></li>
+				<li><input type="range" min="0" max="360" step="1" id="input_WX"></input><span id="span_WX">WX: </span></li>
+				<li><input type="range" min="0" max="360" step="1" id="input_WY"></input><span id="span_WY">WY: </span></li>
+				<li><input type="range" min="0" max="360" step="1" id="input_WZ"></input><span id="span_WZ">WZ: </span></li>
+			</ul>
+			<div class="window"></div>
+		</div>
 
 		<div class="contactInformation" data-status="false">
 			<h2>Hi, i am Dmitry Ivanov</h2>
@@ -33,36 +43,47 @@
 				<li>HTML</li>
 				<li>CSS</li>
 				<li>JavaScript</li>
-				<li>I had work withjQuery</li>
-				<li>And intermediate english skills: B1 - B2</li>
+				<li>jQuery</li>
+				<li>Intermediate english skills: B1 - B2</li>
 			</ul>
+		</div>
+		
+		<div class="contactInformation" data-status="false">
+			<p>Also i pretty familliar with these things:</p>
+			<p>
+				<span>Adobe Photoshop;</span>
+				<span>Adobe Illustrator;</span>
+				<span>C++ (std::lib);</span>
+				<span>HTTP;</span>
+				<span>TCP/IP.</span>
+			</p>
 			<div class="window"></div>
 		</div>
 
 		<div class="contactInformation" id="projList" data-status="false">
 			<h2>Projects</h2>
-			<ul>
+			<ul style="list-style: decimal-leading-zero">
 				<li><a href="https://github.com/daug32/ConsoleRenderer">ConsoleRenderer.</a></li>
 				<li><a href="https://github.com/daug32/HotelDiscord">HotelDiscord.</a></li>
 				<li><a href="https://github.com/daug32/Portfolio">This - Portfolio.</a></li>
 			</ul>
 			<div class="window"></div>
 		</div>
-
-		<div class="line"></div>
 	</main>
 	<footer>
-		<p>Contact me!</p>
-		<ul>
-			<li><a  href="https://vk.com/something_is_here">
-				<img class="contactElement" src="images/VK-holey.png"></img>
-			</a></li>
-			<li><a href="https://github.com/daug32">
-				<img class="contactElement" src="images/GitHub.png"></img>
-			</a></li>
-			<li><a href="">
-				<img class="contactElement" src="images/Discord.png"></img>
-			</a></li>
+		<div class="footer_board" data-status="false">
+			<p>Contact me!</p>
+			<ul>
+				<li><a  href="https://vk.com/something_is_here">
+					<img class="contactElement" src="images/VK-holey.png"></img>
+				</a></li>
+				<li><a href="https://github.com/daug32">
+					<img class="contactElement" src="images/GitHub.png"></img>
+				</a></li>
+				<li><a href="">
+					<img class="contactElement" src="images/Discord.png"></img>
+				</a></li>
+			</ul>
 		</div>
 	</footer>
 	
@@ -72,5 +93,6 @@
 	<script defer src="scripts/drawer.js"></script>
 	<script src="scripts/contactElementsAnimation.js"></script>
 	<script src="scripts/additionalAnimations.js"></script>
+	<script src="scripts/some.js"></script>
 </body>
 </html>

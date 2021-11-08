@@ -35,27 +35,53 @@ ul {
 	position: relative;
 	left: 0;
 }
-p, li, a {
+p, li, a, span {
 	color: var(--White3);
 	text-align: center;
 	font-size: 22px;
 	font-family: "MuseoSansCyr"; 
 	position: relative;
 	transition: all 0.5s;
+	font-weight: normal;
 }
-li, a { text-align: start; }
-.targetLi { filter: brightness(1.5); }
-.notTargetLi { filter: brightness(0.3); }
-#projList ul { list-style: decimal-leading-zero; }
-a { transition: all 0.3s; }
-a:hover {
-	filter: inherit;
+li, a { 
+	text-align: start; 
 }
-
+.targetLi { 
+	filter: brightness(1.5); 
+}
+.notTargetLi { 
+	filter: brightness(0.3); 
+}
+span { 
+	margin: 0 20px;
+	width: min-content;
+}
+a { 
+	transition: all 0.3s; 
+}
+a:hover { 
+	filter: inherit; 
+}
 main, footer {
 	width: 70vw;
 	background-color: rgb(25, 25, 25);
 	justify-content: center;
+}
+@media screen and(min-width: 1300px){
+	main, footer {
+		width: 60vw;
+	}
+}
+@media screen and(max-width: 800px){
+	main, footer {
+		width: 90vw;
+	}
+}
+footer {    
+	display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 #canvasContainer {
 	width: 70vw;
@@ -71,15 +97,48 @@ main, footer {
 	left: -100vw;
 	margin: 0 auto;
 	transition: all 0.75s;
-}
-section {
-	border-color: rgb(89, 89, 89);
-	border-width: 0 2px;
-	border-style:solid;
+	overflow-x: hidden;
+	overflow-y: hidden;
 }
 .contactInformation[data-status = "true"] {
 	left: 0;
+	transition: all 0.75s;
+	visibility: visible;
 } 
+.contactInformation[data-status = "false"] {
+	left: -100vw;
+	transition: all 0s;
+	visibility: hidden;
+}
+.contactInformation[data-status = "true"] li:nth-child(odd), .contactInformation[data-status = "true"] li:nth-child(even) {
+	animation-name: scaleYAppearence;
+	animation-duration: 2s;
+	animation-delay: 0.6s;
+	animation-fill-mode: both;
+}
+.contactInformation[data-status = "true"] li:nth-child(even) {
+	animation-name: scaleXAppearence;
+}
+@keyframes scaleYAppearence {
+	from {
+		visibility: hidden;
+		top: 100vh;
+	}
+	to {
+		visibility: visible;
+		top: 0;
+	}
+}
+@keyframes scaleXAppearence {
+	from {
+		visibility: hidden;
+		left: 100vw;
+	}
+	to {
+		visibility: visible;
+		left: 0;
+	}
+}
 .avatar {
 	width: 100px;
 	position: fixed;
@@ -94,12 +153,34 @@ section {
 	margin-right: auto;
 	margin-left: auto;
 }	
-footer ul {
+.footer_board {
+	width: 70%;
+	border-width: 2px 0 0 0;
+	border-color: var(--White2);
+	border-style: solid;
+	visibility: hidden;
+}
+.footer_board ul {
 	list-style:none;
 	display: flex;
 	justify-content: center;
 	padding: 0;
 	margin: 0;
+}
+.footer_board[data-status = "true"] {
+	animation-name: from-head-appearence;	
+	animation-duration: 1s;
+	animation-fill-mode: both;
+}
+@keyframes from-head-appearence {
+	from {
+		visibility: hidden;
+		transform: rotateY(90deg);
+	}
+	to {
+		visibility: visible;
+		transform: rotateY(0deg);
+	}
 }
 li .contactElement { 
 	transition: all 0.25s;
