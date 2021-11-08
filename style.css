@@ -27,28 +27,31 @@ h2 {
 	font-size: 32px;
 	font-family: "MuseoSansCyr"; 
 }
-p {
+ul {
+	color: var(--White2);
+	font-size: 16px;
+	list-style:circle;
+	transition: all 0.75s;
+	position: relative;
+	left: 0;
+}
+p, li, a {
 	color: var(--White3);
 	text-align: center;
 	font-size: 22px;
 	font-family: "MuseoSansCyr"; 
 	position: relative;
+	transition: all 0.5s;
 }
-a {
-	color: var(--White3);
-	text-align: center;
-	font-size: 22px;
-	font-family: "MuseoSansCyr"; 	
-	transition: all 0.3s;
-}
+li, a { text-align: start; }
+.targetLi { filter: brightness(1.5); }
+.notTargetLi { filter: brightness(0.3); }
+#projList ul { list-style: decimal-leading-zero; }
+a { transition: all 0.3s; }
 a:hover {
-	filter: brightness(1.5);
+	filter: inherit;
 }
-ul {
-	color: var(--White2);
-	font-size: 16px;
-	list-style: decimal-leading-zero;
-}
+
 main, footer {
 	width: 70vw;
 	background-color: rgb(25, 25, 25);
@@ -67,22 +70,16 @@ main, footer {
 	position: relative;
 	left: -100vw;
 	margin: 0 auto;
-	animation-fill-mode: forwards;
-	animation-duration: 2s;
-	animation-name: none;
-	animation-timing-function: linear;
-	transition: all 3s;
-	transition-delay: 3s;
+	transition: all 0.75s;
+}
+section {
+	border-color: rgb(89, 89, 89);
+	border-width: 0 2px;
+	border-style:solid;
 }
 .contactInformation[data-status = "true"] {
-	animation-name: left-right-appearence; 
-}
-a .contactInformation[data-status = "true"] {
-	opacity: 0.3;
-}
-@keyframes left-right-appearence {
-	to { left: 0; }	
-}
+	left: 0;
+} 
 .avatar {
 	width: 100px;
 	position: fixed;
@@ -112,13 +109,12 @@ li .contactElement:hover {
 	width: 40px;
 	height: 40px;
 	margin: 8px;
-	opacity: 40%;
 }
 .contactElement {
 	width: 36px;
 	height: 36px;
 }
 .window {
-	height: 30vh;
+	height: 16vh;
 	width: 100%;
 }

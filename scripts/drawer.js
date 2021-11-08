@@ -36,13 +36,13 @@ function draw(){
 	{
 		rotate.x = map((mouseX - mousePos.x), 0, width, 0, PI);
 		rotate.y = map((mouseY - mousePos.y), 0, width, 0, PI);
-		hyperCube.WX += rotate.x;
-		hyperCube.WY += rotate.y;
+		hyperCube.WY += rotate.x;
+		hyperCube.WZ += rotate.y;
 	}
 	mousePos.x = mouseX;
 	mousePos.y = mouseY;
 	
-	hyperCube.XZ += oneDegree;
+	hyperCube.XY += oneDegree;
 	hyperCube.YZ += oneDegree;
 
 	//we don't need rendering, if we don't see 
