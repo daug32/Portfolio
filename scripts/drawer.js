@@ -46,22 +46,21 @@ function setup(){
 
 function draw(){
 
-	//make the rotation dependence on the mouse position
-	/*
-	if(mouseIsPressed)
+	//make the rotation dependence on the mouse position 
+	if(mouseIsPressed && mouseY < parent.clientHeight)
 	{
+		if(mouseY < parent.getBoundingClientRect().bottom);
 		rotate.x = map((mouseX - mousePos.x), 0, width, 0, 360);
 		rotate.y = map((mouseY - mousePos.y), 0, width, 0, 360);
-		inputParameters[3].value -= -rotate.x;
-		inputParameters[5].value -= -rotate.y;
+		inputParameters[3].value = inputParameters[3].value - (-rotate.x);
+		inputParameters[5].value = inputParameters[5].value - (-rotate.y);
 	}
 	mousePos.x = mouseX;
 	mousePos.y = mouseY;
-	*/
 
 	//with each single frame increase rotation for Z and Y axis
-	inputParameters[0].value -= -1;
-	inputParameters[1].value -= -1;
+	inputParameters[0].value -= -0.5;
+	inputParameters[1].value -= -0.5;
 
 	//we don't need rendering, if we don't see 
 	if(parent.getBoundingClientRect().bottom < 0) return;
@@ -70,15 +69,15 @@ function draw(){
 
 	//to make user's output more spectacular we have to set maximum for rotation
 	for(let i = 0; i < inputParameters.length; i++) 
-		inputParameters[i].value = Math.round(inputParameters[i].value % 360);
+		inputParameters[i].value = Math.round((inputParameters[i].value % 360) * 1000) * 0.001;
 
 	//set textes for spans for each parameter
-	spansParameters[0].innerHTML = "XY(Z-axis): " + inputParameters[0].value;
-	spansParameters[1].innerHTML = "XZ(Y-axis): " + inputParameters[1].value;
-	spansParameters[2].innerHTML = "XY(Z-axis): " + inputParameters[2].value;
-	spansParameters[3].innerHTML = "WX: " + inputParameters[3].value;
-	spansParameters[4].innerHTML = "WY: " + inputParameters[4].value;
-	spansParameters[5].innerHTML = "WZ: " + inputParameters[5].value;
+	spansParameters[0].innerHTML = "XY(Z-axis): " + inputParameters[0].value + " deg";
+	spansParameters[1].innerHTML = "XZ(Y-axis): " + inputParameters[1].value + " deg";
+	spansParameters[2].innerHTML = "XY(Z-axis): " + inputParameters[2].value + " deg";
+	spansParameters[3].innerHTML = "WX: " + inputParameters[3].value + " deg";
+	spansParameters[4].innerHTML = "WY: " + inputParameters[4].value + " deg";
+	spansParameters[5].innerHTML = "WZ: " + inputParameters[5].value + " deg";
 	
 	//set rotation for each direction
 	hyperCube.XY = radians(inputParameters[0].value);
