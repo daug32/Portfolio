@@ -6,9 +6,7 @@
 	<meta http-equiv="Cache-control" content="mast-revalidate">
 </head>
 <body>
-	<header>
-		<img src="images/avatar.png" class="avatar"></img>
-	</header>
+	<img src="images/avatar.png" class="avatar"></img>
 	<main>
 		<h1>Hello, world!\n</h1>
 
@@ -16,7 +14,7 @@
 
 		<div id="canvasContainer"></div>
 		<div class="contactInformation" id="paramList" data-status="false">
-			<p>That's a hypercube. You can rotate it in WX (horizontal) and WZ (vertical) planes using mouse</p>
+			<p>That's a hypercube. You can rotate it in WX and WZ planes using mouse or those </p>
 			<ul>
 				<li><input type="range" min="0" max="360" step="0.1" id="input_YZ"></input><span id="span_YZ">YZ(X-axis): </span></li>
 				<li><input type="range" min="0" max="360" step="0.1" id="input_XZ"></input><span id="span_XZ">XZ(Y-axis): </span></li>
@@ -32,40 +30,39 @@
 			<h2>Hi, i am Dmitry Ivanov</h2>
 			<p>
 				Who am i? I am a bechalor's student at VSUT (Volga State University of Technology) in a software engeneering departament. 
-				A man of his work. I live in Youshkar-Ola (Russia, Mariy El) and trying my best to become a better developer.
+				I live in Youshkar-Ola (Russia, Mariy El) and try my best to become a better developer.
 			</p>
 			<div class="window"></div>
 		</div>
 
 		<div class="contactInformation" data-status="false">
-			<h2>My skills</h2>	
+			<h2>My tech stack</h2>	
 			<ul>
-				<li>HTML</li>
-				<li>CSS</li>
+				<li>PHP & Laravel</li>
 				<li>JavaScript</li>
-				<li>jQuery</li>
-				<li>Intermediate english skills: B1 - B2</li>
+				<li>HTML & CSS</li>
+				<li>C++</li>
 			</ul>
 		</div>
 		
 		<div class="contactInformation" data-status="false">
-			<p>Also i pretty familliar with these things:</p>
+			<p>My other skills:</p>
 			<p>
-				<span>Adobe Photoshop;</span>
-				<span>Adobe Illustrator;</span>
-				<span>C++ (std::lib);</span>
-				<span>HTTP;</span>
-				<span>TCP/IP.</span>
+				<span>Intermediate English</span>
+				<span>Git</span>
+				<span>Adobe Photoshop</span><br>
+				<span>Adobe Illustrator</span>
+				<span>Figma</span>
 			</p>
 			<div class="window"></div>
 		</div>
 
 		<div class="contactInformation" id="projList" data-status="false">
-			<h2>Projects</h2>
+			<h2>Most interesting projects</h2>
 			<ul style="list-style: decimal-leading-zero">
-				<li><a href="https://github.com/daug32/ConsoleRenderer">ConsoleRenderer.</a></li>
-				<li><a href="https://github.com/daug32/HotelDiscord">HotelDiscord.</a></li>
-				<li><a href="https://github.com/daug32/Portfolio">This - Portfolio.</a></li>
+				<li><a href="https://github.com/daug32/ConsoleRenderer">ConsoleRenderer (C++);</a></li>
+				<li><a href="https://github.com/daug32/VKBot">Chat bot for VK (PHP);</a></li>
+				<li><a href="https://github.com/daug32/Everyfiction">Everyfiction - web site for publishing and reading books (PHP + Laravel).</a></li>
 			</ul>
 			<div class="window"></div>
 		</div>
@@ -80,9 +77,6 @@
 				<li><a href="https://github.com/daug32">
 					<img class="contactElement" src="images/GitHub.png"></img>
 				</a></li>
-				<li><a href="">
-					<img class="contactElement" src="images/Discord.png"></img>
-				</a></li>
 			</ul>
 		</div>
 	</footer>
@@ -93,6 +87,5 @@
 	<script defer src="scripts/drawer.js"></script>
 	<script src="scripts/contactElementsAnimation.js"></script>
 	<script src="scripts/additionalAnimations.js"></script>
-	<script src="scripts/some.js"></script>
 </body>
 </html>

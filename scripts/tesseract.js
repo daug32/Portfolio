@@ -44,17 +44,8 @@ class Tesseract{
 			this.baseVertices[i].w -= 0.5;
 		}
 
-		this.drawableVertices = new Array();
-		for(var i = 0; i < 16; i++)
-		{
-			this.drawableVertices.push(new Vector
-			(
-				this.baseVertices[i].x, 
-			    this.baseVertices[i].y,
-			    this.baseVertices[i].z, 
-				this.baseVertices[i].w
-			));
-		}
+		this.drawableVertices = new Array(16);
+		for(let i = 0; i < 16; i++) this.drawableVertices[i] = new Vector();
 	}
 
 	Render(){
@@ -104,6 +95,10 @@ class Tesseract{
 	      
 	      //Rotation actions
 	      //==========================
+
+		  //x y z w
+		  //xy xz xw yz yw zw
+
 	      //for XY
 	      b.Get(a);
 	      a.x = b.x * cos(this.XY) - b.y * sin(this.XY);
@@ -112,22 +107,22 @@ class Tesseract{
 	      b.Get(a);
 	      a.x = b.x * cos(this.XZ) + b.z * sin(this.XZ);
 	      a.z = b.x * (-sin(this.XZ)) + b.z * cos(this.XZ);
-	      //for YZ
-	      b.Get(a);
-	      a.y = b.y * cos(this.YZ) - b.z * sin(this.YZ);
-	      a.z = b.y * sin(this.YZ) + b.z * cos(this.YZ);
 	      //for WX
 	      b.Get(a);
 	      a.x = b.x * cos(this.WX) + b.w * sin(this.WX);
 	      a.w = b.x * (-sin(this.WX)) + b.w * cos(this.WX);
-	      //for WZ
+	      //for YZ
 	      b.Get(a);
-	      a.z = b.z * cos(this.WZ) - b.w * sin(this.WZ);
-	      a.w = b.z * sin(this.WZ) + b.w * cos(this.WZ);
+	      a.y = b.y * cos(this.YZ) - b.z * sin(this.YZ);
+	      a.z = b.y * sin(this.YZ) + b.z * cos(this.YZ);
 	      //for WY
 	      b.Get(a);
 	      a.y = b.y * cos(this.WY) + b.w * sin(this.WY);
 	      a.w = b.y * (-sin(this.WY)) + b.w * cos(this.WY);
+	      //for WZ
+	      b.Get(a);
+	      a.z = b.z * cos(this.WZ) - b.w * sin(this.WZ);
+	      a.w = b.z * sin(this.WZ) + b.w * cos(this.WZ);
 	      //==========================
 	      
 	      //Scaling
