@@ -1,91 +1,111 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>Dmitry Ivanov</title>
-	<link rel="stylesheet" href="style.css" />	
-	<meta http-equiv="Cache-control" content="mast-revalidate">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/style.css">
+    <title>Dmitry Ivanov</title>
 </head>
 <body>
-	<img src="images/avatar.png" class="avatar"></img>
-	<main>
-		<h1>Hello, world!\n</h1>
+<div class="background">
 
-		<div class="line"></div>
+    <header>
+        <h1 class="header__title title">Hello, world!\n</h1>
+        <div class="header__under-line"></div>
+    </header>
 
-		<div id="canvasContainer"></div>
-		<div class="contactInformation" id="paramList" data-status="false">
-			<p>That's a hypercube. You can rotate it in WX and WZ planes using mouse or those </p>
-			<ul>
-				<li><input type="range" min="0" max="360" step="0.1" id="input_YZ"></input><span id="span_YZ">YZ(X-axis): </span></li>
-				<li><input type="range" min="0" max="360" step="0.1" id="input_XZ"></input><span id="span_XZ">XZ(Y-axis): </span></li>
-				<li><input type="range" min="0" max="360" step="0.1" id="input_XY"></input><span id="span_XY">XY(Z-axis): </span></li>
-				<li><input type="range" min="0" max="360" step="0.1" id="input_WX"></input><span id="span_WX">WX: </span></li>
-				<li><input type="range" min="0" max="360" step="0.1" id="input_WY"></input><span id="span_WY">WY: </span></li>
-				<li><input type="range" min="0" max="360" step="0.1" id="input_WZ"></input><span id="span_WZ">WZ: </span></li>
+    <main>
+        <div class="canvas">
+            <script src="/scripts/core/p5.min.js"></script>
+            <script defer type="module" src="/scripts/Animator.js"></script>
+
+            <div id="canvas__anchor"></div>
+
+            <div id="canvas__prop-list" data-status="false">
+                <p class="text">That's a hypercube. You can rotate it in WX and WZ planes using mouse or those </p>
+                <ul class="canvas__data-container">
+                    <li>
+                        <input type="range" min="0" max="360" step="0.1" class="text" id="input_YZ"></input>
+                        <span id="span_YZ" class="text">span_YZ: </span>
+                    </li>
+                    <li>
+                        <input type="range" min="0" max="360" step="0.1" class="text" id="input_XZ"></input>
+                        <span id="span_XZ" class="text">XZ: </span>
+                    </li>
+                    <li>
+                        <input type="range" min="0" max="360" step="0.1" class="text" id="input_XY"></input>
+                        <span id="span_XY" class="text">XY: </span>
+                    </li>
+                    <li>
+                        <input type="range" min="0" max="360" step="0.1" class="text" id="input_WX"></input>
+                        <span id="span_WX" class="text">WX: </span>
+                    </li>
+                    <li>
+                        <input type="range" min="0" max="360" step="0.1" class="text" id="input_WY"></input>
+                        <span id="span_WY" class="text">WY: </span>
+                    </li>
+                    <li>
+                        <input type="range" min="0" max="360" step="0.1" class="text" id="input_WZ"></input>
+                        <span id="span_WZ" class="text">WZ: </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="contact-info" data-status="false">
+            <h2 class="title">Hi, my name is Dmitry Ivanov</h2>
+            <p class="contact-info__text text">
+                Who am i? I am a bechalor's student at VSUT (Volga State University of Technology) 
+                in a software engeneering departament. 
+                I live in Youshkar-Ola (Russia, Mariy El) and try my best to become a better developer.
+            </p>
+            <p class="contact-info__text text">
+                I am currently working at some projects and I hope you are going to see them in my Github profile
+            </p>
+        </div>
+
+        <div class="contact-info" data-status="false">
+            <h2 class="title">My tech stack</h2>
+            <ul class="contact-info__list ul-animation">
+                <li class="text">C#</li>
+                <li class="text">JS</li>
+                <li class="text">HTML & CSS</li>
+            </ul>
+        </div>
+
+		<div class="projects contact-info" data-status="false">
+			<h2 class="title">Most interesting projects</h2>
+			<ul class="projects__list ul-animation">
+				<li class="text">
+                    <a href="https://github.com/daug32/ConsoleRenderer" class="projects__ref">ConsoleRenderer (C++);</a>
+                </li>
+				<li class="text">
+                    <a href="https://github.com/daug32/VKBot" class="projects__ref">Chat bot for VK (PHP);</a>
+                </li>
+				<li class="text">
+                    <a href="https://github.com/daug32/Everyfiction" class="projects__ref">
+                        Everyfiction - web site for publishing and reading books (Backend: C# + EF Core. Frontend: TS + Angular).
+                    </a>
+                </li>
 			</ul>
-			<div class="window"></div>
 		</div>
 
-		<div class="contactInformation" data-status="false">
-			<h2>Hi, i am Dmitry Ivanov</h2>
-			<p>
-				Who am i? I am a bechalor's student at VSUT (Volga State University of Technology) in a software engeneering departament. 
-				I live in Youshkar-Ola (Russia, Mariy El) and try my best to become a better developer.
-			</p>
-			<div class="window"></div>
-		</div>
+    </main>
 
-		<div class="contactInformation" data-status="false">
-			<h2>My tech stack</h2>	
-			<ul>
-				<li>PHP & Laravel</li>
-				<li>JavaScript</li>
-				<li>HTML & CSS</li>
-				<li>C++</li>
-			</ul>
-		</div>
-		
-		<div class="contactInformation" data-status="false">
-			<p>My other skills:</p>
-			<p>
-				<span>Intermediate English</span>
-				<span>Git</span>
-				<span>Adobe Photoshop</span><br>
-				<span>Adobe Illustrator</span>
-				<span>Figma</span>
-			</p>
-			<div class="window"></div>
-		</div>
+    <footer class="footer" data-status="false">
+        <p class="text">Contact me!</p>
+        <div class="footer__board">
+            <a href="https://vk.com/something_is_here">
+                <img src="/images/VK-holey.png" class="footer__board-item">
+            </a>
 
-		<div class="contactInformation" id="projList" data-status="false">
-			<h2>Most interesting projects</h2>
-			<ul style="list-style: decimal-leading-zero">
-				<li><a href="https://github.com/daug32/ConsoleRenderer">ConsoleRenderer (C++);</a></li>
-				<li><a href="https://github.com/daug32/VKBot">Chat bot for VK (PHP);</a></li>
-				<li><a href="https://github.com/daug32/Everyfiction">Everyfiction - web site for publishing and reading books (PHP + Laravel).</a></li>
-			</ul>
-			<div class="window"></div>
-		</div>
-	</main>
-	<footer>
-		<div class="footer_board" data-status="false">
-			<p>Contact me!</p>
-			<ul>
-				<li><a  href="https://vk.com/something_is_here">
-					<img class="contactElement" src="images/VK-holey.png"></img>
-				</a></li>
-				<li><a href="https://github.com/daug32">
-					<img class="contactElement" src="images/GitHub.png"></img>
-				</a></li>
-			</ul>
-		</div>
-	</footer>
-	
-	<script defer src="scripts/core/p5.min.js"></script>
-	<script defer src="scripts/vector.js"></script>
-	<script defer src="scripts/tesseract.js"></script>
-	<script defer src="scripts/drawer.js"></script>
-	<script src="scripts/contactElementsAnimation.js"></script>
-	<script src="scripts/additionalAnimations.js"></script>
+            <a href="https://github.com/daug32">
+                <img src="/images/GitHub.png" class="footer__board-item">
+            </a>
+        </div>
+    </footer>
+
+</div>
 </body>
 </html>
