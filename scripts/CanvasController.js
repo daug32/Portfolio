@@ -27,6 +27,7 @@ export function setup() {
 	background(10);
 }
 
+var a = 0;
 export function draw() {
 	background(10, 10, 10, 80);
 	
@@ -41,7 +42,7 @@ export function draw() {
 	};
 
 	tesseract.rotate(rotation);
-	tesseract.render();
+	tesseract.render(height, width);
 }
 
 function getCenter() {

@@ -1,4 +1,5 @@
-import { Vector, Project3DPointTo2D } from "./Vector.js";
+import { Vector } from "./Vector.js";
+import { Project3DPointTo2D } from './VectorUtils.js'
 
 export class Tesseract {    
     #center = new Vector();
@@ -34,8 +35,7 @@ export class Tesseract {
         new Vector(1, 0, 1, 1)
     ];
 
-    // Chashed calculated vertices
-    #drawableVertices = new Array(16);
+    #calculatedVertices = Array(16).map(_ => new Vector());
     #hasChanges = true;
 
     constructor(center, scale) {
@@ -49,15 +49,11 @@ export class Tesseract {
             this.#baseVertices[i].z -= 0.5;
             this.#baseVertices[i].w -= 0.5;
         }
-
-        for (let i = 0; i < 16; i++) {
-            this.#drawableVertices[i] = new Vector();
-        }
     }
 
-    render() {
+    render(width, height) {
         if (this.#hasChanges) {
-            this.#calculate();
+            this.#calculate(width, height);
             this.#hasChanges = false;
         }
 
@@ -81,7 +77,7 @@ export class Tesseract {
         this.#hasChanges = true;
     }
 
-    #calculate() {
+    #calculate(width, height) {
         let cash = new Vector();
 
         for (let i = 0; i < 16; i++) {
@@ -119,28 +115,27 @@ export class Tesseract {
             vertex.Plus(this.#center);
 
             // Save
-            this.#drawableVertices[i] = vertex;
+            this.#calculatedVertices[i] = Project3DPointTo2D(vertex, this.#center, width, height);
         }
     }
 
     #drawVertices() {
-        for (let i = 0; i < 16; i++) {
-            let vertex = Project3DPointTo2D(this.#drawableVertices[i], this.#center);
+        for (let vertex of this.#calculatedVertices) {
             circle(vertex.x, vertex.y, 5);
         }
     }
 
     #drawEdges() {
         for (let i = 0; i < 16; i++) {
-            for (let j = (i < 1 ? 0 : i - 1); j < 16; j++) {
+            for (let j = (i < 1 ? 1 : i - 1); j < 16; j++) {
                 if (!this.#areNeighbors(i, j)) {
                     continue;
                 }
 
-                let vertexFrom = Project3DPointTo2D(this.#drawableVertices[i], this.#center);
-                let vertexTo = Project3DPointTo2D(this.#drawableVertices[j], this.#center);
+                let from = this.#calculatedVertices[i];
+                let to = this.#calculatedVertices[j];
 
-                line(vertexFrom.x, vertexFrom.y, vertexTo.x, vertexTo.y);
+                line(from.x, from.y, to.x, to.y);
             }
         }
     }
