@@ -1,209 +1,57 @@
-@font-face
-{
-	font-family: "MuseoSansCyr";
-	src: url("/fonts/MuseoSansCyrl-300.ttf");
-}
-
-:root
-{
-	--Text: rgb(159, 159, 159);
-	--Title: rgb(205, 199, 199);
-	--White2: rgb(179, 179, 179);
-	--Background-first: rgb(25, 25, 25);
-	--Background-second: rgb(20, 20, 20);
-}
-
-body 
-{
+* {
 	margin: 0;
-	background-color: var(--Background-second);
+	font-family: 'Roboto';
 }
 
-.background 
-{
-	width: 65%;
-	margin: 0 auto;
-	background-color: var(--Background-first);
-}
-
-.title 
-{
+html, body {
 	width: 100%;
-	text-align: center;
-	font-size: 32px;
-	color: var(--Title);
-	font-family: "MuseoSansCyr";
+	height: 100%;
 }
 
-.text
-{
-	text-align: start;
-	font-size: 22px;
-	color: var(--Text);
-	font-family: "MuseoSansCyr";
-}
-
-/*======================================= 
-* =============== Header ================ 
-* ======================================= */
-
-.header__title
-{
-	font-size: 60px;
-	margin: 0 auto;
-	padding-top: 50px;
-}
-
-.header__under-line
-{
-	width: 90%;
-	background-color: var(--Title);
-}
-
-/*======================================= 
-* =============== Canvas ================ 
-* ======================================= */
-
-#canvas__anchor
-{
-	height: 550px;
-	margin: 0 auto;
-}
-
-.canvas__data-container
-{
-	color: var(--Text);
-	list-style-type: circle;
-}
-
-/*======================================= 
-* ================ Main =================
-* ======================================= */
-
-main
-{
-	width: 80%;
-	margin: 0 auto;
-}
-
-/*======================================= 
-* ============= Contact Info ============
-* ======================================= */
-
-.contact-info
-{
-	position: relative;
-	margin:  200px auto;
-	max-width: 650px;
-	text-align: center;
-}
-
-.contact-info__text
-{
-	text-align: center;
-}
-
-.contact-info__list
-{
-	text-align: start;
-	list-style: circle;
-}
-
-.contact-info[data-status = "true"] 
-{
-	left: 0;
-	visibility: visible;
-	transition: all 0.75s;
-} 
-
-.contact-info[data-status = "false"] 
-{
-	left: -100vw;
-	visibility: hidden;
-	transition: all 0s;
-}
-
-.contact-info li:nth-child(n)
-{
-	opacity: 0;
-	position: relative;
-	transition-property: left, bottom;
-	transition: 0.8s 0.9s;
-}
-
-.contact-info[data-status = "false"] li:nth-child( even )
-{
-	left: -100vw;
-}
-
-.contact-info[data-status = "true"] li:nth-child( even )
-{
-	left: 0;
-	opacity: 1;
-}
-
-.contact-info[data-status = "false"] li:nth-child( odd )
-{
-	bottom: -100vh;
-}
-
-.contact-info[data-status = "true"] li:nth-child( odd )
-{
-	bottom: 0;
-	opacity: 1;
-}
-
-/*======================================= 
-* ================ Projects =============
-* ======================================= */
-
-.projects__list
-{
-	list-style: decimal-leading-zero;
-}
-
-.projects__ref
-{    
-	filter: inherit;
-	color: var(--Text);
-}
-
-/*======================================= 
-* ============== Footer =================
-* ======================================= */
-
-.footer
-{
-	width: 100%;
-	margin: 0 auto;
-	padding-bottom: 80px;
+.body {
+	background-color: rgb(10, 10, 10);
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	justify-content: space-between;
 }
 
-.footer::before
-{
-	content: "";
-	width: 90%;
-	height: 2px;
-	background-color: var(--Text);
+/* General */
+.title, .text {
+	text-align: center;
+	color: rgb(216, 216, 216);
 }
 
-.footer__board
-{
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	column-gap: 20px;
+#canvas__anchor {
+	height: 100%;
+	width: 100%;
 }
 
-.footer__board-item
-{
-	width: 40px;
-	transition: all 0.1s;
+/* Content */
+.content {
+	width: 100%;
+	height: 600px;
 }
 
-.footer__board-item:hover	
-{
-	transform: scale(1.1);
+.content__icons-wrapper {
+	margin-top: 20px;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.content__reference {
+	width: 30px;
+	margin: 0 5px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.content__icon {
+	width: 100%;
+}
+
+.content__icon_inverted {
+	filter: invert(1);
 }

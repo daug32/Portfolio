@@ -1,143 +1,156 @@
-import { Vector, Projection3Dto2D } from "/scripts/Vector.js";
+import { Vector, Project3DPointTo2D } from "./Vector.js";
 
-export class Tesseract 
-{
-    constructor(center, scale) 
-    {
-        //Rotation in radians
-        this.XY = 0;
-        this.XZ = 0;
-        this.YZ = 0;
-        this.WX = 0;
-        this.WY = 0;
-        this.WZ = 0;
-        
-        this.numOfIteration = 0;
+export class Tesseract {    
+    #center = new Vector();
+    #scale = new Vector(1, 1, 1, 1);
+    #rotation = {
+        XY: 0,
+        XZ: 0,
+        YZ: 0,
+        WX: 0,
+        WY: 0,
+        WZ: 0
+    };
 
-        this.center = center;
-        this.scale = scale;
+    #baseVertices = [
+        new Vector(0, 0, 0, 0),
+        new Vector(0, 1, 0, 0),
+        new Vector(1, 1, 0, 0),
+        new Vector(1, 0, 0, 0),
 
-        this.baseVertices = [
-            new Vector( 0, 0, 0, 0 ),
-            new Vector( 0, 1, 0, 0 ),
-            new Vector( 1, 1, 0, 0 ),
-            new Vector( 1, 0, 0, 0 ),
+        new Vector(0, 0, 1, 0),
+        new Vector(0, 1, 1, 0),
+        new Vector(1, 1, 1, 0),
+        new Vector(1, 0, 1, 0),
 
-            new Vector( 0, 0, 1, 0 ),
-            new Vector( 0, 1, 1, 0 ),
-            new Vector( 1, 1, 1, 0 ),
-            new Vector( 1, 0, 1, 0 ),
+        new Vector(0, 0, 0, 1),
+        new Vector(0, 1, 0, 1),
+        new Vector(1, 1, 0, 1),
+        new Vector(1, 0, 0, 1),
 
-            new Vector( 0, 0, 0, 1 ),
-            new Vector( 0, 1, 0, 1 ),
-            new Vector( 1, 1, 0, 1 ),
-            new Vector( 1, 0, 0, 1 ),
+        new Vector(0, 0, 1, 1),
+        new Vector(0, 1, 1, 1),
+        new Vector(1, 1, 1, 1),
+        new Vector(1, 0, 1, 1)
+    ];
 
-            new Vector( 0, 0, 1, 1 ),
-            new Vector( 0, 1, 1, 1 ),
-            new Vector( 1, 1, 1, 1 ),
-            new Vector( 1, 0, 1, 1 )
-        ];
+    // Chashed calculated vertices
+    #drawableVertices = new Array(16);
+    #hasChanges = true;
 
-        for ( let i = 0; i < 16; i++ ) 
-        {
-            this.baseVertices[i].x -= 0.5;
-            this.baseVertices[i].y -= 0.5;
-            this.baseVertices[i].z -= 0.5;
-            this.baseVertices[i].w -= 0.5;
+    constructor(center, scale) {
+        this.#center = center;
+        this.#scale = scale;
+
+        // Normalize vertices
+        for (let i = 0; i < 16; i++) {
+            this.#baseVertices[i].x -= 0.5;
+            this.#baseVertices[i].y -= 0.5;
+            this.#baseVertices[i].z -= 0.5;
+            this.#baseVertices[i].w -= 0.5;
         }
 
-        this.drawableVertices = new Array( 16 );
-        for ( let i = 0; i < 16; i++ ) 
-        {
-            this.drawableVertices[i] = new Vector();
+        for (let i = 0; i < 16; i++) {
+            this.#drawableVertices[i] = new Vector();
         }
     }
 
-    Render() 
-    {
-        // Vectors are used for:
-        // making names of vertices smaller,
-        // copying values from vertices
-        // and saving stored data in vertices
-        let a = new Vector();
-        let b = new Vector();
-        let c = new Vector();
-
-        for ( var i = 0; i < 16; i++ ) 
-        {
-            a.Get( this.baseVertices[i] );
-
-            for ( var j = (i < 1 ? 0 : i - 1); j < 16; j++ ) 
-            {
-                b.Get( this.baseVertices[j] );
-                b.Minus( a );
-                if ( abs( b.Length() - 1 ) < 0.01 ) 
-                {
-                    //Get values from saved vertex
-                    c.Get( this.drawableVertices[i] );
-                    b.Get( this.drawableVertices[j] );
-
-                    //Make projection to the screen plane 
-                    Projection3Dto2D( c, this.center );
-                    Projection3Dto2D( b, this.center );
-
-                    line( c.x, c.y, b.x, b.y );
-                }
-            }
-            circle( c.x, c.y, 10 );
+    render() {
+        if (this.#hasChanges) {
+            this.#calculate();
+            this.#hasChanges = false;
         }
-        this.numOfIteration++;
+
+        this.#drawEdges();
+        this.#drawVertices();
     }
 
-    Calculate() 
-    {
-        let a = new Vector();
-        let b = new Vector();
+    setCenter(center) {
+        this.#center = center;
+        this.#hasChanges = true;
+    }
 
-        for ( let i = 0; i < 16; i++ ) {
-            // Get value
-            a.Get( this.baseVertices[i] );
+    rotate(rotation) {
+        if (rotation.XY != null) this.#rotation.XY += rotation.XY;
+        if (rotation.XZ != null) this.#rotation.XZ += rotation.XZ;
+        if (rotation.YZ != null) this.#rotation.YZ += rotation.YZ;
+        if (rotation.WX != null) this.#rotation.WX += rotation.WX;
+        if (rotation.WY != null) this.#rotation.WY += rotation.WY;
+        if (rotation.WZ != null) this.#rotation.WZ += rotation.WZ;
+
+        this.#hasChanges = true;
+    }
+
+    #calculate() {
+        let cash = new Vector();
+
+        for (let i = 0; i < 16; i++) {
+            let vertex = this.#baseVertices[i].Copy();
 
             // Rotation actions
+            cash.CopyFrom(vertex);
+            vertex.x = cash.x * cos(this.#rotation.XY) - cash.y * sin(this.#rotation.XY);
+            vertex.y = cash.x * sin(this.#rotation.XY) + cash.y * cos(this.#rotation.XY);
 
-            // for XY
-            b.Get( a );
-            a.x = b.x * cos( this.XY ) - b.y * sin( this.XY );
-            a.y = b.x * sin( this.XY ) + b.y * cos( this.XY );
+            cash.CopyFrom(vertex);
+            vertex.x = cash.x * cos(this.#rotation.XZ) + cash.z * sin(this.#rotation.XZ);
+            vertex.z = cash.x * (-sin(this.#rotation.XZ)) + cash.z * cos(this.#rotation.XZ);
 
-            // for XZ
-            b.Get( a );
-            a.x = b.x * cos( this.XZ ) + b.z * sin( this.XZ );
-            a.z = b.x * ( -sin( this.XZ ) ) + b.z * cos( this.XZ );
+            cash.CopyFrom(vertex);
+            vertex.x = cash.x * cos(this.#rotation.WX) + cash.w * sin(this.#rotation.WX);
+            vertex.w = cash.x * (-sin(this.#rotation.WX)) + cash.w * cos(this.#rotation.WX);
 
-            // for WX
-            b.Get( a );
-            a.x = b.x * cos( this.WX ) + b.w * sin( this.WX );
-            a.w = b.x * ( -sin( this.WX ) ) + b.w * cos( this.WX );
+            cash.CopyFrom(vertex);
+            vertex.y = cash.y * cos(this.#rotation.YZ) - cash.z * sin(this.#rotation.YZ);
+            vertex.z = cash.y * sin(this.#rotation.YZ) + cash.z * cos(this.#rotation.YZ);
 
-            // for YZ
-            b.Get( a );
-            a.y = b.y * cos( this.YZ) - b.z * sin( this.YZ );
-            a.z = b.y * sin( this.YZ) + b.z * cos( this.YZ );
+            cash.CopyFrom(vertex);
+            vertex.y = cash.y * cos(this.#rotation.WY) + cash.w * sin(this.#rotation.WY);
+            vertex.w = cash.y * (-sin(this.#rotation.WY)) + cash.w * cos(this.#rotation.WY);
 
-            // for WY
-            b.Get( a );
-            a.y = b.y * cos( this.WY ) + b.w * sin( this.WY );
-            a.w = b.y * ( -sin( this.WY ) ) + b.w * cos(this.WY );
-
-            // for WZ
-            b.Get( a );
-            a.z = b.z * cos( this.WZ ) - b.w * sin( this.WZ );
-            a.w = b.z * sin( this.WZ ) + b.w * cos( this.WZ );
+            cash.CopyFrom(vertex);
+            vertex.z = cash.z * cos(this.#rotation.WZ) - cash.w * sin(this.#rotation.WZ);
+            vertex.w = cash.z * sin(this.#rotation.WZ) + cash.w * cos(this.#rotation.WZ);
 
             //Scaling
-            a.Multipy( this.scale );
+            vertex.Multipy(this.#scale);
 
             //Translating
-            a.Plus( this.center );
+            vertex.Plus(this.#center);
 
-            this.drawableVertices[i].Get( a );
+            // Save
+            this.#drawableVertices[i] = vertex;
         }
+    }
+
+    #drawVertices() {
+        for (let i = 0; i < 16; i++) {
+            let vertex = Project3DPointTo2D(this.#drawableVertices[i], this.#center);
+            circle(vertex.x, vertex.y, 5);
+        }
+    }
+
+    #drawEdges() {
+        for (let i = 0; i < 16; i++) {
+            for (let j = (i < 1 ? 0 : i - 1); j < 16; j++) {
+                if (!this.#areNeighbors(i, j)) {
+                    continue;
+                }
+
+                let vertexFrom = Project3DPointTo2D(this.#drawableVertices[i], this.#center);
+                let vertexTo = Project3DPointTo2D(this.#drawableVertices[j], this.#center);
+
+                line(vertexFrom.x, vertexFrom.y, vertexTo.x, vertexTo.y);
+            }
+        }
+    }
+
+    #areNeighbors(firstVertexIndex, secondVertexIndex) {
+        let first = this.#baseVertices[firstVertexIndex].Copy();
+        let second = this.#baseVertices[secondVertexIndex].Copy();
+
+        first.Minus(second);
+
+        return abs(first.Length() - 1) == 0;
     }
 }

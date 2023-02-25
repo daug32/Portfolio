@@ -1,111 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/style.css">
     <title>Dmitry Ivanov</title>
+    <link href='https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap' rel='stylesheet'>
 </head>
-<body>
-<div class="background">
 
-    <header>
-        <h1 class="header__title title">Hello, world!\n</h1>
-        <div class="header__under-line"></div>
-    </header>
+<body class="body">
+    <div id="canvas__anchor"></div>
 
-    <main>
-        <div class="canvas">
-            <script src="/scripts/core/p5.min.js"></script>
-            <script defer type="module" src="/scripts/Animator.js"></script>
+    <main class="content">
+        <h1 class="title">Hello there!</h1>
+        <p class="text">Call me Daug32</p>
 
-            <div id="canvas__anchor"></div>
+        <div class="content__icons-wrapper">
+            <a href="mailto: daug32@mail.ru" class="content__reference" target="_blank">
+                <img class="content__icon content__icon_inverted" src="./images/mail.svg" alt="email">
+            </a>
 
-            <div id="canvas__prop-list" data-status="false">
-                <p class="text">That's a hypercube. You can rotate it in WX and WZ planes using mouse or those </p>
-                <ul class="canvas__data-container">
-                    <li>
-                        <input type="range" min="0" max="360" step="0.1" class="text" id="input_YZ"></input>
-                        <span id="span_YZ" class="text">span_YZ: </span>
-                    </li>
-                    <li>
-                        <input type="range" min="0" max="360" step="0.1" class="text" id="input_XZ"></input>
-                        <span id="span_XZ" class="text">XZ: </span>
-                    </li>
-                    <li>
-                        <input type="range" min="0" max="360" step="0.1" class="text" id="input_XY"></input>
-                        <span id="span_XY" class="text">XY: </span>
-                    </li>
-                    <li>
-                        <input type="range" min="0" max="360" step="0.1" class="text" id="input_WX"></input>
-                        <span id="span_WX" class="text">WX: </span>
-                    </li>
-                    <li>
-                        <input type="range" min="0" max="360" step="0.1" class="text" id="input_WY"></input>
-                        <span id="span_WY" class="text">WY: </span>
-                    </li>
-                    <li>
-                        <input type="range" min="0" max="360" step="0.1" class="text" id="input_WZ"></input>
-                        <span id="span_WZ" class="text">WZ: </span>
-                    </li>
-                </ul>
-            </div>
+            <a href="https://github.com/daug32/" class="content__reference" target="_blank">
+                <img class="content__icon" src="./images/github.svg" alt="github">
+            </a>
+
+            <a href="https://t.me/daug32" class="content__reference" target="_blank">
+                <img class="content__icon" src="./images/telegram.svg" alt="telegram">
+            </a>
         </div>
-
-        <div class="contact-info" data-status="false">
-            <h2 class="title">Hi, my name is Dmitry Ivanov</h2>
-            <p class="contact-info__text text">
-                Who am i? I am a bechalor's student at VSUT (Volga State University of Technology) 
-                in a software engeneering departament. 
-                I live in Youshkar-Ola (Russia, Mariy El) and try my best to become a better developer.
-            </p>
-            <p class="contact-info__text text">
-                I am currently working at some projects and I hope you are going to see them in my Github profile
-            </p>
-        </div>
-
-        <div class="contact-info" data-status="false">
-            <h2 class="title">My tech stack</h2>
-            <ul class="contact-info__list ul-animation">
-                <li class="text">C#</li>
-                <li class="text">JS</li>
-                <li class="text">HTML & CSS</li>
-            </ul>
-        </div>
-
-		<div class="projects contact-info" data-status="false">
-			<h2 class="title">Most interesting projects</h2>
-			<ul class="projects__list ul-animation">
-				<li class="text">
-                    <a href="https://github.com/daug32/ConsoleRenderer" class="projects__ref">ConsoleRenderer (C++);</a>
-                </li>
-				<li class="text">
-                    <a href="https://github.com/daug32/VKBot" class="projects__ref">Chat bot for VK (PHP);</a>
-                </li>
-				<li class="text">
-                    <a href="https://github.com/daug32/Everyfiction" class="projects__ref">
-                        Everyfiction - web site for publishing and reading books (Backend: C# + EF Core. Frontend: TS + Angular).
-                    </a>
-                </li>
-			</ul>
-		</div>
-
     </main>
 
-    <footer class="footer" data-status="false">
-        <p class="text">Contact me!</p>
-        <div class="footer__board">
-            <a href="https://vk.com/something_is_here">
-                <img src="/images/VK-holey.png" class="footer__board-item">
-            </a>
-
-            <a href="https://github.com/daug32">
-                <img src="/images/GitHub.png" class="footer__board-item">
-            </a>
-        </div>
-    </footer>
-
-</div>
+    <script src="./scripts/core/p5.min.js"></script>
+    <script src="./scripts/main.js" type="module"></script>
 </body>
+
 </html>

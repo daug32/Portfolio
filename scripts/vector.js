@@ -1,47 +1,49 @@
-export class Vector 
-{
-	constructor( x = 0, y = 0, z = 0, w = 0 ) 
-	{
+export class Vector {
+	constructor(x = 0, y = 0, z = 0, w = 0) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
 		this.w = w;
 	}
 
-	Get( a ) 
-	{
+	Copy() {
+		return new Vector(
+			this.x,
+			this.y, 
+			this.z, 
+			this.w
+		);
+	}
+
+	CopyFrom(a) {
 		this.x = a.x;
 		this.y = a.y;
 		this.z = a.z;
 		this.w = a.w;
 	}
 
-	Multipy( a ) 
-	{
+	Multipy(a) {
 		this.x *= a.x;
 		this.y *= a.y;
 		this.z *= a.z;
 		this.w *= a.w;
 	}
 
-	Plus( a ) 
-	{
+	Plus(a) {
 		this.x += a.x;
 		this.y += a.y;
 		this.z += a.z;
 		this.w += a.w;
 	}
 
-	Minus( a ) 
-	{
+	Minus(a) {
 		this.x -= a.x;
 		this.y -= a.y;
 		this.z -= a.z;
 		this.w -= a.w;
 	}
 
-	Length(  ) 
-	{
+	Length() {
 		return this.x * this.x +
 			this.y * this.y +
 			this.z * this.z +
@@ -49,20 +51,24 @@ export class Vector
 	}
 }
 
-export function Projection3Dto2D( Point3D, center ) 
-{
+export function Project3DPointTo2D(point, center) {
+	let result = new Vector();
+	result.CopyFrom(point)
+
 	//Position of the center of the screen;
-	let coordCenter = new Vector( center.x, center.y );
+	let coordCenter = new Vector(center.x, center.y);
 
 	//Translate origin to the center of the screen;
-	Point3D.Minus( coordCenter );
-	
-	//Calculate nearest position with the field of view equal to 90 degrees
-	let near = min( height, width ) / 2 / tan( PI / 4 );
+	result.Minus(coordCenter);
 
-	Point3D.x = Point3D.x * near / Point3D.z;
-	Point3D.y = Point3D.y * near / Point3D.z;
+	//Calculate nearest position with the field of view equal to 90 degrees
+	let near = min(height, width) / 2 / tan(PI / 4);
+
+	result.x = result.x * near / result.z;
+	result.y = result.y * near / result.z;
 
 	//Translate back
-	Point3D.Plus( coordCenter );
+	result.Plus(coordCenter);
+
+	return result;
 }
