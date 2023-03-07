@@ -25,12 +25,12 @@ export function setup() {
 	// Init view
 	stroke(255);
 	background(10);
+	frameRate(50);
 }
 
-var a = 0;
 export function draw() {
 	background(10, 10, 10, 80);
-	
+
 	let rotationStep = Math.PI / 360;
 	let rotation = {
 		// XY: rotationStep,
@@ -40,7 +40,7 @@ export function draw() {
 		WY: rotationStep,
 		WZ: rotationStep,
 	};
-
+	
 	tesseract.rotate(rotation);
 	tesseract.render(height, width);
 }

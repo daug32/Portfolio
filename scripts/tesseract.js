@@ -80,33 +80,38 @@ export class Tesseract {
     #calculate(width, height) {
         let cash = new Vector();
 
+        // Cash cos and sin calculations for better performance
+        let rotation = Object.entries(this.#rotation);
+        let rotationCos = Object.fromEntries(rotation.map(pair => [pair[0], cos(pair[1])]));
+        let rotationSin = Object.fromEntries(rotation.map(pair => [pair[0], sin(pair[1])]));
+
         for (let i = 0; i < 16; i++) {
             let vertex = this.#baseVertices[i].Copy();
 
             // Rotation actions
             cash.CopyFrom(vertex);
-            vertex.x = cash.x * cos(this.#rotation.XY) - cash.y * sin(this.#rotation.XY);
-            vertex.y = cash.x * sin(this.#rotation.XY) + cash.y * cos(this.#rotation.XY);
+            vertex.x = cash.x * rotationCos.XY - cash.y * rotationSin.XY;
+            vertex.y = cash.x * rotationSin.XY + cash.y * rotationCos.XY;
 
             cash.CopyFrom(vertex);
-            vertex.x = cash.x * cos(this.#rotation.XZ) + cash.z * sin(this.#rotation.XZ);
-            vertex.z = cash.x * (-sin(this.#rotation.XZ)) + cash.z * cos(this.#rotation.XZ);
+            vertex.x = cash.x * rotationCos.XZ + cash.z * rotationSin.XZ;
+            vertex.z = cash.x * (-rotationSin.XZ) + cash.z * rotationCos.XZ;
 
             cash.CopyFrom(vertex);
-            vertex.x = cash.x * cos(this.#rotation.WX) + cash.w * sin(this.#rotation.WX);
-            vertex.w = cash.x * (-sin(this.#rotation.WX)) + cash.w * cos(this.#rotation.WX);
+            vertex.x = cash.x * rotationCos.WX + cash.w * rotationSin.WX;
+            vertex.w = cash.x * (-rotationSin.WX) + cash.w * rotationCos.WX;
 
             cash.CopyFrom(vertex);
-            vertex.y = cash.y * cos(this.#rotation.YZ) - cash.z * sin(this.#rotation.YZ);
-            vertex.z = cash.y * sin(this.#rotation.YZ) + cash.z * cos(this.#rotation.YZ);
+            vertex.y = cash.y * rotationCos.YZ - cash.z * rotationSin.YZ;
+            vertex.z = cash.y * rotationSin.YZ + cash.z * rotationCos.YZ;
 
             cash.CopyFrom(vertex);
-            vertex.y = cash.y * cos(this.#rotation.WY) + cash.w * sin(this.#rotation.WY);
-            vertex.w = cash.y * (-sin(this.#rotation.WY)) + cash.w * cos(this.#rotation.WY);
+            vertex.y = cash.y * rotationCos.WY + cash.w * rotationSin.WY;
+            vertex.w = cash.y * (-rotationSin.WY) + cash.w * rotationCos.WY;
 
             cash.CopyFrom(vertex);
-            vertex.z = cash.z * cos(this.#rotation.WZ) - cash.w * sin(this.#rotation.WZ);
-            vertex.w = cash.z * sin(this.#rotation.WZ) + cash.w * cos(this.#rotation.WZ);
+            vertex.z = cash.z * rotationCos.WZ - cash.w * rotationSin.WZ;
+            vertex.w = cash.z * rotationSin.WZ + cash.w * rotationCos.WZ;
 
             //Scaling
             vertex.Multipy(this.#scale);
